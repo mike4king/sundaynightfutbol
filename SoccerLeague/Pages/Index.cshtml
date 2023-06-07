@@ -1,0 +1,58 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Standings</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SeasonId" class="control-label">Change Season</label>
+                <select asp-for="SeasonId" class="form-control" asp-items="Model.Seasons" onchange="javascript:this.form.submit();">
+                    <option>--Select a Season--</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Team</th>
+        <th>GP</th>
+        <th>W</th>
+        <th>D</th>
+        <th>L</th>
+        <th>GD</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Standings) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TeamName)</td>
+            <td>@Html.DisplayFor(modelItem => item.GamesPlayed)</td>
+            <td>@Html.DisplayFor(modelItem => item.GamesWon)</td>
+            <td>@Html.DisplayFor(modelItem => item.GamesTied)</td>
+            <td>@Html.DisplayFor(modelItem => item.GamesLost)</td>
+            <td>@Html.DisplayFor(modelItem => item.ScoreDifferential)</td>
+            <td>@Html.DisplayFor(modelItem => item.Points)</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@if (!Model.Standings.Any())
+{
+    <p>No teams/matches set up</p>    
+}
+
+<div>
+    <a asp-page="AddMatch" class="btn btn-primary">Add Match</a>
+</div>
