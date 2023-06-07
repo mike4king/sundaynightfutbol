@@ -3,5 +3,5 @@
 ################################################################################
 
 /.vs
-/SoccerLeague/bin/Debug/net7.0
+/SoccerLeague/bin
 /SoccerLeague/obj
